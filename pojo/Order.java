@@ -29,34 +29,34 @@ public class Order implements Serializable {
     @NotBlank(message = "Podanie ulicy jest obowiązkowe.")
     private String street;
 
-    @NotBlank(message= "Podanie miejscowości jest obowiązkowe.")
+    @NotBlank(message = "Podanie miejscowości jest obowiązkowe.")
     private String city;
 
-    @NotBlank(message="Podanie województwa jest obowiązkowe.")
+    @NotBlank(message = "Podanie województwa jest obowiązkowe.")
     private String state;
 
-    @NotBlank(message="Podanie kodu pocztowego jest obowiązkowe.")
+    @NotBlank(message = "Podanie kodu pocztowego jest obowiązkowe.")
     private String zip;
 
-    @CreditCardNumber(message="To nie jest prawidłowy numer karty kredytowej.")
+    @CreditCardNumber(message = "To nie jest prawidłowy numer karty kredytowej.")
     private String ccNumber;
 
-    @Pattern(regexp="^(0[1-9]|1[0-2])([\\/])([1-9][0-9])$",
-            message="Wartość musi być w formacie MM/RR.")
+    @Pattern(regexp = "^(0[1-9]|1[0-2])([\\/])([1-9][0-9])$",
+            message = "Wartość musi być w formacie MM/RR.")
     private String ccExpiration;
 
-    @Digits(integer = 3, fraction = 0,message = "Nieprawidłowy kod CVV.")
+    @Digits(integer = 3, fraction = 0, message = "Nieprawidłowy kod CVV.")
     private String ccCVV;
 
     @ManyToMany
     private List<Taco> tacos = new ArrayList<>();
 
-    public void addDesign(Taco design){
+    public void addDesign(Taco design) {
         this.tacos.add(design);
     }
 
     @PrePersist
-    void placedAt(){
+    void placedAt() {
         this.placedAt = new Date();
     }
 
