@@ -51,10 +51,10 @@ public class DesignTacoController {
     }
 
     @PostMapping
-    public String processDesign(Model design) {
+    public String processDesign(Taco taco) {
     // Zapisanie projektu przygotowanego taco...
     // Tym się zajmiesz w rozdziale 3.
-        log.info("Przetwarzanie projektu taco: " + design);
+        log.info("Przetwarzanie projektu taco: " + taco);
         return "redirect:/orders/current";
     }
 
