@@ -1,14 +1,13 @@
 package pl.kruchyxe.taco.controller;
 
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.boot.Banner;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import pl.kruchyxe.taco.pojo.Ingredient;
-import pl.kruchyxe.taco.pojo.Taco;
+import pl.kruchyxe.taco.model.Ingredient;
+import pl.kruchyxe.taco.model.Taco;
 
 import java.util.Arrays;
 import java.util.List;

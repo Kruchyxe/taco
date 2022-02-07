@@ -1,4 +1,4 @@
-package pl.kruchyxe.taco.pojo;
+package pl.kruchyxe.taco.model;
 
 import lombok.Data;
 
