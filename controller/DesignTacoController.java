@@ -4,11 +4,12 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import pl.kruchyxe.taco.model.Ingredient;
+import pl.kruchyxe.taco.model.Order;
 import pl.kruchyxe.taco.model.Taco;
+import pl.kruchyxe.taco.repository.IngredientRepository;
+import pl.kruchyxe.taco.repository.TacoRepository;
 
 import javax.validation.Valid;
 import java.util.Arrays;
@@ -18,10 +19,22 @@ import java.util.stream.Collectors;
 @Slf4j
 @Controller
 @RequestMapping("/design")
+@SessionAttributes("order")
 public class DesignTacoController {
 
+    private final IngredientRepository ingredientRepository;
+    private TacoRepository tacoRepository;
+
+    public DesignTacoController(
+            IngredientRepository ingredientRepository,
+            TacoRepository tacoRepository) {
+        this.ingredientRepository = ingredientRepository;
+        this.tacoRepository = tacoRepository;
+    }
+
+
     @GetMapping
-    public String showDesignForm(Model model){
+    public String showDesignForm(Model model) {
         List<Ingredient> ingredients = Arrays.asList(
                 new Ingredient("FLTO", "pszenna", Ingredient.Type.WRAP),
                 new Ingredient("COTO", "kukurydziana", Ingredient.Type.WRAP),
@@ -51,15 +64,16 @@ public class DesignTacoController {
                 .collect(Collectors.toList());
     }
 
-    @PostMapping
-    public String processDesign(@Valid Taco taco, Errors errors) {
-        if(errors.hasErrors()){
+    @PostMapping()
+    public String processDesign(@Valid Taco taco, Errors errors, @ModelAttribute Order order) {
+        if (errors.hasErrors()) {
             return "design";
         }
 
-    // Zapisanie projektu przygotowanego taco...
-    // Tym się zajmiesz w rozdziale 3.
-        log.info("Przetwarzanie projektu taco: " + taco);
+        Taco saved = tacoRepository.save(taco);
+        order.addDesign(saved);
+
+
         return "redirect:/orders/current";
     }
 

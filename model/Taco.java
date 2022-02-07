@@ -1,6 +1,9 @@
 package pl.kruchyxe.taco.model;
 
+import lombok.AccessLevel;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -9,6 +12,7 @@ import java.util.Date;
 import java.util.List;
 
 @Data
+@RequiredArgsConstructor
 @Entity
 public class Taco {
 
