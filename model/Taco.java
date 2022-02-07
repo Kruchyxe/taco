@@ -23,7 +23,7 @@ public class Taco {
     private Date createdAt;
 
     @ManyToMany
-    @Size(min = 1, message = "Musisz wybrać przynajmniej jeden składnik.")
+    @Size(min = 1, message = "Musisz wybrać przynajmniej jade składnik.")
     private List<Ingredient> ingredients;
 
     @PrePersist
