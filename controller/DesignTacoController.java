@@ -64,13 +64,23 @@ public class DesignTacoController {
                 .collect(Collectors.toList());
     }
 
+    @ModelAttribute(name = "order")
+    public Order order(){
+        return new Order();
+    }
+
+    @ModelAttribute(name = "design")
+    public Taco design(){
+        return new Taco();
+    }
+
     @PostMapping()
-    public String processDesign(@Valid Taco taco, Errors errors, @ModelAttribute Order order) {
+    public String processDesign(@Valid Taco design, Errors errors, @ModelAttribute Order order) {
         if (errors.hasErrors()) {
             return "design";
         }
 
-        Taco saved = tacoRepository.save(taco);
+        Taco saved = tacoRepository.save(design);
         order.addDesign(saved);
 
 
